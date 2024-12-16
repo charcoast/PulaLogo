@@ -23,7 +23,7 @@ export class CrunchyRoll implements Streaming {
 
     skip(el: HTMLElement) {
         el.click()
-        console.log("Jump button clicked");
+        console.log("Botão de pular foi pressionado");
     };
 
 }
