@@ -1,24 +1,24 @@
-const { build } = require("esbuild");
-const { dependencies, peerDependencies } = require("./package.json");
+const {build} = require("esbuild");
+const {dependencies, peerDependencies} = require("./package.json");
 
 const sharedConfig = {
-  entryPoints: ["scripts/streaming/crunchy-roll.ts"],
-  bundle: true,
-  minify: true,
-  external: Object.keys(dependencies).concat(
-    Object.keys(peerDependencies ?? {})
-  ),
+    bundle: true,
+    minify: true,
+    external: Object.keys(dependencies).concat(
+        Object.keys(peerDependencies ?? {})
+    ),
 };
 
 build({
-  ...sharedConfig,
-  platform: "browser", // for CJS
-  outfile: "dist/bundle.js",
+    ...sharedConfig,
+    entryPoints: ["scripts/streaming/crunchy-roll.ts"],
+    platform: "browser",
+    outfile: "dist/crunchy-roll.js",
 });
 
 build({
-  ...sharedConfig,
-  outfile: "dist/bundle.esm.js",
-  platform: "neutral", // for ESM
-  format: "esm",
+    ...sharedConfig,
+    entryPoints: ["scripts/streaming/netflix.ts"],
+    platform: "browser",
+    outfile: "dist/netflix.js",
 });
