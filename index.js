@@ -6,11 +6,11 @@ const netflixForm = document.querySelector("#netflix_form");
 
 browser.storage.local.get("netflix").then(st => {
     const netflixInputs = netflixForm.querySelectorAll("input");
-
-    const disable = !st.netflix["enabled"];
+    const netflixOptions = st.netflix ?? {};
+    const disable = !(netflixOptions.enabled ?? false);
 
     netflixInputs.forEach(input => {
-        input.checked = st.netflix[input.name] ?? false;
+        input.checked = netflixOptions[input.name] ?? false;
         if (input.name !== "enabled") {
             input.disabled = disable;
         }
