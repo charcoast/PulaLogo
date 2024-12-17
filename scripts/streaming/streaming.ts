@@ -1,5 +1,5 @@
 export type Streaming = {
-    tryGetElement: () => HTMLElement|null,
-    trySkip: () => void
+    tryGetElement: () => Promise<HTMLElement | null>,
+    trySkip: () => Promise<void>
     skip: (el: HTMLElement) => void
 }

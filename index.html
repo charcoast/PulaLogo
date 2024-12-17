@@ -1,8 +1,32 @@
 <html lang="pt-br">
+<meta charset="UTF-8">
 <script type="application/javascript" src="node_modules/webextension-polyfill/dist/browser-polyfill.min.js"></script>
+<link rel="stylesheet" href="index.css">
 <body>
-<label for="switch">Habilitado</label>
-<input type="checkbox" name="enabled" id="switch"/>
+<h4>Netflix</h4>
+<form id="netflix_form">
+    <div class="row">
+        <label for="netflix_enabled">Habilitado</label>
+        <input type="checkbox" name="enabled" id="netflix_enabled"/>
+    </div>
+    <div class="row">
+        <label for="netflix_skipIntros">Pular introdução</label>
+        <input type="checkbox" name="skipIntros" id="netflix_skipIntros"/>
+    </div>
+    <div class="row">
+        <label for="netflix_skipRecaps">Pular recapitulação</label>
+        <input type="checkbox" name="skipRecaps" id="netflix_skipRecaps"/>
+    </div>
+    <div class="row">
+        <label for="netflix_nextEpisode">Pular para o próximo episódio</label>
+        <input type="checkbox" name="nextEpisode" id="netflix_nextEpisode"/>
+    </div>
+    <div class="row">
+        <label for="netflix_continueWatching">Continuar assistindo</label>
+        <input type="checkbox" name="continueWatching" id="netflix_continueWatching"/>
+    </div>
+</form>
+<h4>Crunchy Roll</h4>
 </body>
 <script type="text/javascript" src="index.js"></script>
 </html>

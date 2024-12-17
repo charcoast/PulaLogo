@@ -1,15 +1,44 @@
 /// <reference types="chrome"/>
 /// <reference types="web-ext-types"/>
 
-const checkbox = document.querySelector("#switch");
+const netflixForm = document.querySelector("#netflix_form");
 
-// eslint-disable-next-line no-undef
-browser.storage.local.get("enabled").then((r) => {
-        checkbox.checked = r.enabled;
+
+browser.storage.local.get("netflix").then(st => {
+    const netflixInputs = netflixForm.querySelectorAll("input");
+
+    const disable = !st.netflix["enabled"];
+
+    netflixInputs.forEach(input => {
+        input.checked = st.netflix[input.name] ?? false;
+        if (input.name !== "enabled") {
+            input.disabled = disable;
+        }
+    });
+
+});
+
+
+netflixForm.addEventListener("change", async function (event) {
+    event.stopPropagation();
+    const netflix = {
+        ...(await browser.storage.local.get("netflix")).netflix,
+        [event.target.name]: event.target.checked
+    };
+    console.log("current netflix ", netflix);
+    await browser.storage.local.set({
+        netflix: netflix
+    });
+
+    if (event.target.name === "enabled") {
+        const netflixInputs = netflixForm.querySelectorAll("input");
+
+        const disable = !netflix.enabled;
+
+        netflixInputs.forEach(input => {
+            if (input.name !== "enabled") {
+                input.disabled = disable;
+            }
+        });
     }
-);
-
-checkbox.addEventListener("change", function (event) {
-    console.log("changed to ", event.target.checked);
-    chrome.storage.local.set({enabled: event.target.checked});
 });

@@ -1,21 +1,16 @@
-import {ButtonClicker} from "../button-clicker";
-import {Streaming} from "./streaming";
+import {ButtonClicker} from "../../button-clicker";
+import {Streaming} from "../streaming";
 
 const selector = '[data-testid="skipButton"] div';
 
 export class CrunchyRoll implements Streaming {
 
-    tryGetElement(): HTMLElement | null {
-        const wrapper = document.querySelector(selector);
-        if (!wrapper) return null;
-
-        const button = wrapper.children[0];
-
-        return button as HTMLElement;
+    async tryGetElement(): Promise<HTMLElement | null> {
+        return document.querySelector(selector) as HTMLElement | null;
     }
 
-    trySkip() {
-        const el = this.tryGetElement();
+    async trySkip() {
+        const el = await this.tryGetElement();
         if (el) {
             this.skip(el)
         }
