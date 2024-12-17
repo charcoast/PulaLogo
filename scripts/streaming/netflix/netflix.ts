@@ -1,9 +1,12 @@
 import {Streaming} from "../streaming";
 import {ButtonClicker} from "../../button-clicker";
 import {NetflixOptions} from "./netflixOptions";
+import setNetworkFilter = chrome.networking.config.setNetworkFilter;
 
 const SKIP_RECAP_SELECTOR = '[data-uia="player-skip-recap"]';
 const SKIP_INTRO_SELECTOR = '[data-uia="player-skip-intro"]'
+const NEXT_EPISODE_SELECTOR = '[data-uia="next-episode-seamless-button"]'
+const CONTINUE_WATCHING_SELECTOR = '[data-uia="interrupt-autoplay-continue"]'
 
 export class Netflix implements Streaming {
 
@@ -19,6 +22,12 @@ export class Netflix implements Streaming {
         }
         if (netflix.skipRecaps) {
             skipArray.push(SKIP_RECAP_SELECTOR)
+        }
+        if (netflix.nextEpisode) {
+            skipArray.push(NEXT_EPISODE_SELECTOR)
+        }
+        if (netflix.continueWatching) {
+            skipArray.push(CONTINUE_WATCHING_SELECTOR)
         }
 
         return `${skipArray.join(", ")}`
