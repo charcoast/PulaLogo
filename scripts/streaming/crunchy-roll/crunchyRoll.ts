@@ -1,11 +1,25 @@
 import {ButtonClicker} from "../../button-clicker";
 import {Streaming} from "../streaming";
+import {CrunchyRollOptions} from "./crunchyRollOptions";
 
-const selector = '[data-testid="skipButton"] div';
+const SKIP_INTO_SELECTOR = '[data-testid="skipButton"] div';
 
 export class CrunchyRoll implements Streaming {
 
+    async getSelector(): Promise<string | undefined> {
+        const crunchyroll = (await browser.storage.local.get('crunchyroll'))?.crunchyroll as CrunchyRollOptions | undefined
+
+        if (!crunchyroll || !crunchyroll.enabled) {
+            return undefined;
+        }
+        return SKIP_INTO_SELECTOR;
+
+    }
+
     async tryGetElement(): Promise<HTMLElement | null> {
+        const selector = await this.getSelector();
+        if (!selector) return null;
+
         return document.querySelector(selector) as HTMLElement | null;
     }
 

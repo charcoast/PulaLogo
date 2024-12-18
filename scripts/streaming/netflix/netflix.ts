@@ -1,7 +1,6 @@
 import {Streaming} from "../streaming";
 import {ButtonClicker} from "../../button-clicker";
 import {NetflixOptions} from "./netflixOptions";
-import setNetworkFilter = chrome.networking.config.setNetworkFilter;
 
 const SKIP_RECAP_SELECTOR = '[data-uia="player-skip-recap"]';
 const SKIP_INTRO_SELECTOR = '[data-uia="player-skip-intro"]'
@@ -37,7 +36,7 @@ export class Netflix implements Streaming {
     async tryGetElement(): Promise<HTMLElement | null> {
         const selector = await this.getSelector();
         if (!selector) return null;
-        // console.log(selector)
+
         return document.querySelector(selector) as HTMLElement | null;
     };
 
