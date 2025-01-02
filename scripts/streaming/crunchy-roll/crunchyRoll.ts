@@ -1,4 +1,4 @@
-import {ButtonClicker} from "../../button-clicker";
+import {ButtonClicker} from "../../buttonClicker";
 import {Streaming} from "../streaming";
 import {CrunchyRollOptions} from "./crunchyRollOptions";
 

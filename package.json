@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "build": "node build.js"
   },
@@ -6,10 +7,11 @@
     "esbuild": "0.24.0"
   },
   "devDependencies": {
-    "@types/firefox-webext-browser": "^120.0.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
+    "@eslint/json": "^0.9.0",
     "@types/chrome": "^0.0.287",
+    "@types/firefox-webext-browser": "^120.0.4",
     "@types/webextension-polyfill": "^0.12.1",
     "chrome-types": "^0.1.325",
     "eslint": "^9.17.0",

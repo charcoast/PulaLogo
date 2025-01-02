@@ -1,4 +1,5 @@
-import {Streaming} from "./streaming/streaming";
+import { LOG_PREFIX } from "./common";
+import { Streaming } from "./streaming/streaming";
 
 export class ButtonClicker {
     static async observeAndClick(streaming: Streaming) {
@@ -13,7 +14,7 @@ export class ButtonClicker {
     }
 
     static async waitForElm(streaming: Streaming): Promise<HTMLElement> {
-        console.log("Procurando pelo botão de pular");
+        console.log(LOG_PREFIX + " Procurando pelo botão de pular");
         return new Promise(async (resolve) => {
             let el = await streaming.tryGetElement();
             if (el) {

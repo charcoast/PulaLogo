@@ -1,5 +1,5 @@
 import {Streaming} from "../streaming";
-import {ButtonClicker} from "../../button-clicker";
+import {ButtonClicker} from "../../buttonClicker";
 import {NetflixOptions} from "./netflixOptions";
 
 const SKIP_RECAP_SELECTOR = '[data-uia="player-skip-recap"]';
