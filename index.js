@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /// <reference types="chrome"/>
 /// <reference types="web-ext-types"/>
 
@@ -22,33 +21,33 @@ for (let streaming of [netflixForm, crunchyrollForm]) {
   });
 
   streaming.addEventListener("change", (event) => {
-    void handleChangeEvent(event, streaming.name);
+    void handleChangeEvent(event, streaming);
   });
 }
 
 async function handleChangeEvent(event, streaming) {
+
+  const name = streaming.name;
   event.stopPropagation();
   const newStreamingConfig = {
-    ...(await browser.storage.local.get(streaming))[streaming],
+    ...(await browser.storage.local.get(name))[name],
     [event.target.name]: event.target.checked,
   };
 
   await browser.storage.local.set({
-    [streaming]: newStreamingConfig,
+    [name]: newStreamingConfig,
   });
-  if (event.target.name === "enabled") {
-    const formElement = event
-      .composedPath()
-      .find((x) => x.tagName.toLowerCase() === "form");
-    if (formElement) {
-      const netflixInputs = formElement.querySelectorAll("input");
 
-      const disable = !newStreamingConfig.enabled;
-      netflixInputs.forEach((input) => {
-        if (input.name !== "enabled") {
-          input.disabled = disable;
-        }
-      });
-    }
+
+  if (event.target.name === "enabled") {
+
+    const inputs = streaming.querySelectorAll("input");
+
+    const disable = !newStreamingConfig.enabled;
+    inputs.forEach((input) => {
+      if (input.name !== "enabled") {
+        input.disabled = disable;
+      }
+    });
   }
 }
